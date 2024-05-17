@@ -5,16 +5,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { EditorForm } from './app/pages/EditorForm';
 
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-        	<Route path="/" element={<EditorForm />} />
-        </Routes>
-
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div className='App'>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<EditorForm />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
