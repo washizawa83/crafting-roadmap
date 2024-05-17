@@ -9,10 +9,7 @@ const allSearch = (
         return new Map([[roadmapItemObj.id, roadmapItemObj.roadmap]]);
     }
 
-    let result: Map<string, RoadmapItem> = new Map<string, RoadmapItem>([[
-        roadmapItemObj.id,
-        roadmapItemObj.roadmap,
-    ]]);
+    let result: Map<string, RoadmapItem> = new Map<string, RoadmapItem>([[roadmapItemObj.id,roadmapItemObj.roadmap,]]);
 
     Array.from(roadmapItemObj.roadmap.children).forEach((child) => {
         const childRoadmapItem = allSearch({ id: child[0], roadmap: child[1] });
