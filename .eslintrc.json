@@ -13,7 +13,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 15,
+        "ecmaVersion": 2015,
         "sourceType": "module"
     },
     "plugins": [
@@ -21,5 +21,6 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "react/prop-types": "off"
     }
 }

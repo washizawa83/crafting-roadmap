@@ -1,3 +1,4 @@
+import React from 'react';
 import { RoadmapItem } from '../../types/Editor';
 import { RoadmapTableRow } from './RoadmapTableRow';
 
