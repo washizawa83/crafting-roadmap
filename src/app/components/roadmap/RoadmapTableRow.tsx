@@ -1,21 +1,22 @@
-import { RoadmapItem } from "../../types/Editor";
+import React from 'react';
+import { RoadmapItem } from '../../types/Editor';
 
 interface RoadmapTableProps {
-    id: string,
-    roadmapItem:  RoadmapItem
+    id: string;
+    roadmapItem: RoadmapItem;
 }
 
-export const RoadmapTableRow: React.FC<RoadmapTableProps> = ({id, roadmapItem}) => {
+export const RoadmapTableRow: React.FC<RoadmapTableProps> = (
+    { id, roadmapItem },
+) => {
     return (
         <>
-            {
-                Array(roadmapItem.column).fill(0).map((_, index) => (
-                    <td key={index}></td>
-                ))
-            }
+            {Array(roadmapItem.column).fill(0).map((_, index) => (
+                <td key={index}></td>
+            ))}
             <td>
                 <div contentEditable={true}>AAAAA</div>
             </td>
         </>
-    )
-}
+    );
+};
