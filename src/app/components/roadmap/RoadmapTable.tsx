@@ -30,14 +30,17 @@ interface RoadmapTableProps {
 }
 
 export const RoadmapTable: React.FC<RoadmapTableProps> = ({ roadmap }) => {
-    const test = '';
-    console.log(test);
     return (
         <>
             <table>
                 <tbody>
                     <tr>
-                        <input type='text' placeholder='作りたいもの・目標' />
+                        <td>
+                            <input
+                                type='text'
+                                placeholder='作りたいもの・目標'
+                            />
+                        </td>
                     </tr>
                     {Array.from(roadmap).map((roadmapItem) => (
                         Array.from(
@@ -57,7 +60,9 @@ export const RoadmapTable: React.FC<RoadmapTableProps> = ({ roadmap }) => {
                             ))
                     ))}
                     <tr>
-                        <div className='crafting-form-goal'>ゴール</div>
+                        <td>
+                            <div className='crafting-form-goal'>ゴール</div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
