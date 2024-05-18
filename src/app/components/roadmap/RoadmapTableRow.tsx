@@ -15,7 +15,7 @@ export const RoadmapTableRow: React.FC<RoadmapTableProps> = (
                 <td key={index} data-testid='hierarchy-column'></td>
             ))}
             <td>
-                <div contentEditable={true}>AAAAA</div>
+                <input />
             </td>
         </>
     );
