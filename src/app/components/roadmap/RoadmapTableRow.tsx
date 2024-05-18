@@ -12,7 +12,7 @@ export const RoadmapTableRow: React.FC<RoadmapTableProps> = (
     return (
         <>
             {Array(roadmapItem.column).fill(0).map((_, index) => (
-                <td key={index}></td>
+                <td key={index} data-testid='hierarchy-column'></td>
             ))}
             <td>
                 <div contentEditable={true}>AAAAA</div>

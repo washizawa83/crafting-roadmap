@@ -1,4 +1,4 @@
-name: Formatter
+name: PR check
 on: [pull_request]
 jobs:
   dprint:
@@ -19,3 +19,5 @@ jobs:
         run: |
           npm ci
           npx dprint check ${{ env.GIT_DIFF_FILTERED }}
+      - name: Run Test
+        run: npm run test
