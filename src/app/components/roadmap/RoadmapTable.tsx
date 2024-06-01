@@ -1,28 +1,34 @@
 import React from 'react';
 import { RoadmapItem } from '../../types/Editor';
 import { RoadmapTableRow } from './RoadmapTableRow';
+import { RoadmapTableRowInput } from './RoadmapTableRowInput';
 
-const allSearch = (
-    roadmapItemObj: { id: string; roadmap: RoadmapItem },
-): Map<string, RoadmapItem> => {
-    if (!roadmapItemObj.roadmap.children) {
-        return new Map([[roadmapItemObj.id, roadmapItemObj.roadmap]]);
-    }
-
-    let result: Map<string, RoadmapItem> = new Map<string, RoadmapItem>([[
-        roadmapItemObj.id,
-        roadmapItemObj.roadmap,
-    ]]);
-
-    Array.from(roadmapItemObj.roadmap.children).forEach((child) => {
-        const childRoadmapItem = allSearch({ id: child[0], roadmap: child[1] });
-        result = result.set(
-            childRoadmapItem.keys().next().value,
-            childRoadmapItem.values().next().value,
+const searchRoadmap = (
+    roadmap: Map<string, RoadmapItem>,
+): [string, RoadmapItem][] => {
+    const roadmapItems: [string, RoadmapItem][] = [];
+    const searchChildren = (
+        roadmapItem: { id: string; childRoadmapItem: RoadmapItem },
+    ): void => {
+        roadmapItems.push([roadmapItem.id, roadmapItem.childRoadmapItem]);
+        if (roadmapItem.childRoadmapItem.children === undefined) return;
+        Array.from(roadmapItem.childRoadmapItem.children).forEach(
+            (childRoadmapItem) => {
+                searchChildren({
+                    id: childRoadmapItem[0],
+                    childRoadmapItem: childRoadmapItem[1],
+                });
+            },
         );
-    });
+    };
 
-    return result;
+    Array.from(roadmap).map((roadmapItem) => {
+        searchChildren({
+            id: roadmapItem[0],
+            childRoadmapItem: roadmapItem[1],
+        });
+    });
+    return roadmapItems;
 };
 
 interface RoadmapTableProps {
@@ -31,41 +37,31 @@ interface RoadmapTableProps {
 
 export const RoadmapTable: React.FC<RoadmapTableProps> = ({ roadmap }) => {
     return (
-        <>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <input
-                                type='text'
-                                placeholder='作りたいもの・目標'
+        <table>
+            <tbody>
+                <tr>
+                    <td className='pb-7 table-row-line-bottom'>
+                        <RoadmapTableRowInput placeHolder='Start' />
+                    </td>
+                </tr>
+                {searchRoadmap(roadmap)
+                    .map((rowRoadmapItem, index) => (
+                        <tr key={`tr-${index}`}>
+                            <RoadmapTableRow
+                                key={rowRoadmapItem[0]}
+                                id={rowRoadmapItem[0]}
+                                roadmapItem={rowRoadmapItem[1]}
                             />
-                        </td>
-                    </tr>
-                    {Array.from(roadmap).map((roadmapItem) => (
-                        Array.from(
-                            allSearch({
-                                id: roadmapItem[0],
-                                roadmap: roadmapItem[1],
-                            }),
-                        )
-                            .map((rowRoadmapItem, index) => (
-                                <tr key={`tr-${index}`}>
-                                    <RoadmapTableRow
-                                        key={roadmapItem[0]}
-                                        id={rowRoadmapItem[0]}
-                                        roadmapItem={rowRoadmapItem[1]}
-                                    />
-                                </tr>
-                            ))
+                        </tr>
                     ))}
-                    <tr>
-                        <td>
-                            <div className='crafting-form-goal'>ゴール</div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </>
+                <tr>
+                    <td>
+                        <div className='text-xl pt-6 text-center table-row-line-top'>
+                            GOAL 🎉
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     );
 };
