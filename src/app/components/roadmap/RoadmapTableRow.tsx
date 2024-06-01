@@ -1,5 +1,7 @@
 import React from 'react';
 import { RoadmapItem } from '../../types/Editor';
+import { RoadmapTableLine } from './RoadmapTableLine';
+import { RoadmapTableRowInput } from './RoadmapTableRowInput';
 
 interface RoadmapTableProps {
     id: string;
@@ -12,10 +14,18 @@ export const RoadmapTableRow: React.FC<RoadmapTableProps> = (
     return (
         <>
             {Array(roadmapItem.column).fill(0).map((_, index) => (
-                <td key={index} data-testid='hierarchy-column'></td>
+                <RoadmapTableLine
+                    key={index}
+                    index={index}
+                    roadmapItem={roadmapItem}
+                />
             ))}
-            <td>
-                <input />
+            <td
+                className={`pb-7 ${
+                    roadmapItem.children && 'table-row-line-bottom'
+                }`}
+            >
+                <RoadmapTableRowInput />
             </td>
         </>
     );

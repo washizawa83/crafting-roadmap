@@ -6,6 +6,7 @@ import { RoadmapTableRow } from './RoadmapTableRow';
 const roadmapItem: RoadmapItem = {
     type: 'text',
     column: 1,
+    isLastChild: true,
 };
 
 describe('test RoadmapTableRow component', () => {

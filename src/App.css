@@ -46,3 +46,96 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {
+	--table-left-line-top-position: 20%;
+	--table-line: 1px solid #888
+}
+
+.table-row-line-top {
+	position: relative;
+}
+.table-row-line-top:before {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	height: 48px;
+	top: 0;
+	left: 50%;
+}
+
+.table-row-line-bottom {
+	position: relative;
+}
+.table-row-line-bottom::before {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	height: 64px;
+	bottom: 0;
+	left: 50%;
+}
+
+.table-line {
+	position: relative;
+}
+.table-line::before {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	height: 100%;
+	top: 0;
+	left: 50%;
+}
+
+.table-line-left {
+	position: relative;
+}
+.table-line-left::after {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	width: 50%;
+	top: var(--table-left-line-top-position);
+	left: 50%;
+}
+
+.table-line-root-child {
+	position: relative;
+}
+.table-line-root-child::before {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	height: 100%;
+	top: 0;
+	left: 50%;
+}
+.table-line-root-child::after {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	width: 50%;
+	top: var(--table-left-line-top-position);
+	left: 50%;
+}
+
+.table-line-last-child {
+	position: relative;
+}
+.table-line-last-child::before {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	height: var(--table-left-line-top-position);
+	top: 0;
+	left: 50%;
+}
+.table-line-last-child::after {
+	position: absolute;
+	content: '';
+	border: var(--table-line);
+	width: 175px;
+	top: var(--table-left-line-top-position);
+	left: 50%;
+}
